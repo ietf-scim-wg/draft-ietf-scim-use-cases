@@ -17,7 +17,7 @@ author:
 
 - name: Pamela Dingle
   org: Microsoft Corporation
-  email: 'pamela.dingle@microsoft.com'
+  email: pamela.dingle@microsoft.com
 
 normative:
   RFC2119:
