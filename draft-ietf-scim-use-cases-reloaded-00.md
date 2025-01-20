@@ -1,6 +1,6 @@
 ---
 stand_alone: true
-docname: draft-ietf-scim-use-cases-00
+docname: draft-ietf-scim-use-cases-reloaded-00
 ipr: trust200902
 submissiontype: IETF
 keyword: [Internet-Draft, SCIM]
