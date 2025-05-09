@@ -90,7 +90,7 @@ This document provides definitions, overviews, concepts, flows, and use cases th
  |         |                       | /Groups |
  |         |                       | /Device |
  +---------+                       +---------+
-    Figure 1: SCIM Components
+    Figure 1: SCIM Components  
 ~~~
 
  The intent of the SCIM specification is to reduce the cost and complexity of resource management operations by providing common schemas and an extension model, as well as binding documents to offer patterns for exchanging this schema using standard protocols. In essence, it aims to make it fast, cheap, and easy to move resources into, out of, and around applications.
