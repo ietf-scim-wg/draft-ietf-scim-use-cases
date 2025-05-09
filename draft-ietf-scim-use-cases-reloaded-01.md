@@ -28,6 +28,11 @@ informative:
   RFC9110:
   RFC9112:
   RFC8417:
+  RFC7832:
+  SAML2:
+     target: https://www.oasis-open.org/standard/saml/
+     org: Oasis Open
+     date: 2005-03
   SCIM Profile for Security Event Tokens:
      target: https://datatracker.ietf.org/doc/draft-ietf-scim-events
      title: SCIM Profile for Security Event Tokens
@@ -51,7 +56,7 @@ The specifications have two primary goals:
  2. Standardized patterns for how those resources can be operated on, including "CRUD" operations (Create, Read, Update, Delete) for resource objects and more advanced goals such as search filters, synchronization of large resource populations, etc.
 These goals are codified as a data model in [RFC7643], which defines resources, attributes, and default schemas, as well as a protocol definition built on HTTP in [RFC7644]. By standardizing the data model and protocol for resource management, entire ecosystems can achieve better interoperability, security, and scalability.
 
-This document provides definitions, overviews, concepts, flows, and use cases that implementers may need to understand the design and applicability of the SCIM schema [RFC7643] and SCIM protocol [RFC7644]. Unlike some protocols like Application Bridging for Federated Access Beyond Web (ABFAB) and SAML2 WebSSO, SCIM provides provisioning and de-provisioning of resources in a separate context from authentication. While SCIM is a protocol that standardizes the movement of data only between two parties in an HTTP client-server model, this document discusses implementation patterns that use concepts beyond the core schema and protocol, which are necessary to understand how SCIM actions can fit into larger architectures.
+This document provides definitions, overviews, concepts, flows, and use cases that implementers may need to understand the design and applicability of the SCIM schema [RFC7643] and SCIM protocol [RFC7644]. Unlike some protocols like Application Bridging for Federated Access Beyond Web (ABFAB) [RFC7832] and SAML2 WebSSO [SAML2], SCIM provides provisioning and de-provisioning of resources in a separate context from authentication. While SCIM is a protocol that standardizes the movement of data only between two parties in an HTTP client-server model, this document discusses implementation patterns that use concepts beyond the core schema and protocol, which are necessary to understand how SCIM actions can fit into larger architectures.
 
 # Terminology
  The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC2119] when they appear in ALL CAPS. These words may also appear in this document in lowercase as plain English words, absent their normative meanings. Here is a list of acronyms and abbreviations used in this document:
@@ -77,14 +82,14 @@ This document provides definitions, overviews, concepts, flows, and use cases th
  The SCIM architecture is a client-server model centered on a normative concept of a "resource." Resources have types (such as a user or a group), and each unique instance of a resource type is represented by a JSON object, accessed via a standardized REST API. Each resource object can be managed individually or in bulk using actions that by default are specified in [RFC9110](HTTP GET, PUT, POST, etc.), but may also expand to concepts in extension documents, such as security event tokens (SETs). This model enables organizations to represent information about user populations and the groups those user populations are part of using the core specifications, and to extend to other important resources using extension drafts in the same family, with the high-level concept of performing SCIM actions on resource objects. SCIM actions result in resource objects and associated data "moving" between the client and server, as clients actively push and pull information that reflects changes over time. This communication of data enables systems within domains and across domains to operate on the freshest possible version of object state.
 
 ~~~
- +---------+                       +--------+
- |  SCIM   |                       |        | 
- | Server  |                       |        | 
- |         | <--- SCIM Action ---  |  SCIM  |
- | /Users  |                       | Client |
- | /Groups |                       |        |
- | /Device |                       |        |
- +---------+                       +--------+
+ +---------+                       +---------+
+ |         |                       |  SCIM   | 
+ |         |                       | Server  | 
+ |  SCIM   | --- SCIM Action --->  |         |
+ | Client  |                       | /Users  |
+ |         |                       | /Groups |
+ |         |                       | /Device |
+ +---------+                       +---------+
     Figure 1: SCIM Components
 ~~~
 
@@ -98,7 +103,7 @@ This document provides definitions, overviews, concepts, flows, and use cases th
  SCIM defines two types of data entities: Resources and Attributes.
 
 #### SCIM Resource Object (SRO)
- A JSON object representing a user, group (or extension object like devices) used by the CRUD operations through the SCIM protocol. The Resource Object contains attributes defined by schemas such as those defined in [RFC7643] and can be implemented via the endpoints and parameters defined in [RFC7644].
+ A JSON object representing a user, group (or extension object like devices) used by the CRUD operations through the SCIM protocol. The Resource Object contains attributes defined by schemas such as those defined in [RFC7643] and can be implemented via the endpoints and parameters defined in [RFC7644]. Others SCIM Resource Object (SRO) maybe defined by IETF and register in IANA under SCIM Schema URIs for Data Resources, there is alo the possibility of using the SCIM protocol with private SCIM Resource Object (SRO) that will not even be register in IANA.
 
 #### SCIM Resource Object Attribute (SROA)
  A named element of a SCIM Resource Object (SRO). Attributes are defined in section 2 of [RFC7643] and include characteristics like cardinality (single or multiple values), data types (string, boolean, binary, etc.), and characteristics (required, unique, etc.).
@@ -132,17 +137,18 @@ An entity can have one or more orchestrator roles, depending on the overall arch
  An entity that has information about SCIM Resource Object (SRO) and their SCIM Resource Object Attribute (SROA) but does not participate in SCIM flows. Examples include databases or internally-facing applications.
 
 ~~~
-   +--------------+ +---------------+   +----------d---+ +---------------+
-   |(SRO) Resource| |(SROA) Resource|   |(SRO) Resource| |(SROA) Resource|
-   |    Object1   | |   Attribute1  |   |    Object2   | |   Attribute2  |
-   +--------------+ +---------------+   +-----------d--+ +---------------+
-            |               |                 |               |
-     +-------------+ +-------------+   +-------------+ +-------------+
-     |(RC) Resource| |(RU) Resource|   |(RC) Resource| |(RU) Resource|
-     |  Creators   | |  Updaters   |   |  Creators   | |  Updaters   |
-     +-------------+ +-------------+   +-------------+ +-------------+
-            |               |                 |                |
-            +--------+------+-----------------+-------+--------+
++-----------------+ +---------------+   +-----------------+ +---------------+
+|    Resource     | |               |   |    Resource     | |               |
+|  (SRO) Object1  | |(SROA) Resource|   |  (SRO) Object2  | |(SROA) Resource|
+|(SROA) Attribute1| |   Attribute1  |   |(SROA) Attribute3| |   Attribute4  |
++-----------------+ +---------------+   +-----------------+ +---------------+
+        |                   |                    |                  |
+  +-------------+   +-------------+       +-------------+    +-------------+
+  |(RC) Resource|   |(RU) Resource|       |(RC) Resource|    |(RU) Resource|
+  |  Creators   |   |  Updaters   |       |  Creators   |    |  Updaters   |
+  +-------------+   +-------------+       +-------------+    +-------------+
+        |                  |                    |                  |
+        +------------+-----+--------------------+-----+------------+
                      |                                |
                      v                                v
              +----------------+              +----------------+
@@ -161,10 +167,10 @@ An entity can have one or more orchestrator roles, depending on the overall arch
     +---------------------+                     +----------------+
     |                     |                     |                |
     v                     v                     v                v
-+--------------+ +---------------+      +--------------+ +---------------+
-|(SRO) Resource| |(SROA) Resource|      |(SRO) Resource| |(SROA) Resource|
-|   Object1    | |   Attribute1  |......|    Object2   | |   Attribute2  |
-+--------------+ +---------------+      +--------------+ +---------------+
++--------------+ +--------------+      +--------------+ +--------------+
+|(SRO) Resource| |(SRO) Resource|      |(SRO) Resource| |(SRO) Resource|
+|   Object1    | |   Object2    |......|    ObjectX   | |   ObjectZ    |
++--------------+ +--------------+      +--------------+ +--------------+
     Figure 2: SCIM Orchestrators Roles
 ~~~
 
@@ -256,7 +262,7 @@ An entity can have one or more orchestrator roles, depending on the overall arch
    2. The SCIM Server will return the RO and its RA along with additional metadata information to allow for auditing.
 
 #### Active Dynamic Query
- A SCIM client uses the HTTP GET verb to request data from a SCIM server. With the action of an active pull, the client will fetch one or multiple objects from the SCIM server. The response data from the SCIM server will include a Dynamic Query (DQ) token that allows the client to subsequent active pulls that will only return RO objects that have changed (including references to deleted objects). The data returned from a dynamic query is usually much smaller, and allows a client to focus only on processing incremental changes rather than performing a full sync every time. With this kind of action, SCIM reconciliations are possible, where the SCIM client can resolve inconsistencies created over time between the client and the SCIM server.
+ A SCIM client uses the HTTP GET verb to request data from a SCIM server. With the action of an active pull, the client will fetch one or multiple objects from the SCIM server. The response data from the SCIM server will include a Dynamic Query (DQ) token that allows the client to subsequent active pulls that will only return RO objects that have changed (including references to deleted objects). The data returned from a dynamic query is usually much smaller, and allows a client to focus only on processing incremental changes rather than performing a full sync every time. With this kind of action, SCIM reconciliations are possible, where the SCIM client can resolve inconsistencies created over time between the client and the SCIM server. This SCIM actions is not cover by an RFC yet, and will need to bedetailed in a RFC.
 
 ~~~
 +----------+                                   +----------+
@@ -480,7 +486,7 @@ Resource Creator/Updater in a single tenant that can either be the SCIM Client o
 
 ##### Single-Tenant Resource Creator/Updater that is the SCIM Client
 It is common today for the SCIM Client, typically performing the roles RC (Resource Creator) and RU (Resource Updater) to perform CRUD operations on the database of the RS (Resource Subscriber) or RM (Resrouce Manager) using the Active Push method. This action delivers SCIM Resource Object (SRO) and their SCIM Resource Object Attribute (SROA) from a single-tenant provision service to a Consumer.
-A good example would be traditional on-premises HR (Human Resource) applications that creates Resrouce Object (RO) either in central IdM (Identity Management) system or directly in a target aplications.
+A good example would be traditional on-premises HR (Human Resource) applications that creates SCIM Resource Object (SRO) either in central IdM (Identity Management) system or directly in a target aplications.
 
 ~~~
 Provision Domain
@@ -899,7 +905,7 @@ Sometimes, not all the SCIM Resource Object Attribute (SROA) of a SCIM Resource 
 #### Implementers Provision Domain is a SCIM Client and a SCIM server
 The implementer's domain acts as the SCIM Client and is the authority for regular attributes such as first name, last name, home address, etc., of a user. These attributes are created and updated by the Provision Domain, which functions as the Resource Manager (RM), Resource Creator (RC), and Resource Updater (RU).
 The application is the authority for one or more specific SCIM Resource Object Attribute (SROA), such as the email address of a given user. This means the application will serve as the Resource Manager (RM), Resource Creator (RC), and Resource Updater (RU) for those specific attributes only.
-Both the Provision Domain and the application will function as both the SCIM Client and SCIM Server for the respective Resource Attributes they are responsible for. They will use the SCIM action of Active Push to pass the Resource Attributes of the Resource Object to their counterpart.
+Both the Provision Domain and the application will function as both the SCIM Client and SCIM Server for the respective SCIM Resource Object Attribute (SROA) they are responsible for. They will use the SCIM action of Active Push to pass the RSCIM Resource Object Attribute (SROA) of the SCIM Resource Object (SRO) to their counterpart.
 Thus, both the roles of SCIM Server and SCIM Client exist within the Provision Domain and the application.
 
 ~~~
@@ -934,7 +940,7 @@ Provision Domain                                  Customer A
 #### Implementers Provision Domain is a SCIM Client
 The implementer's domain acts as the SCIM Client and is the authority for regular attributes, such as first name, last name, home address, etc., of a user. These attributes are created and updated by the Provision Domain, which functions as the Resource Manager (RM), Resource Creator (RC), and Resource Updater (RU).
 The application is the authority for one or more specific SCIM Resource Object Attribute (SROA), such as the email address of a given user. This means the application will serve as the Resource Manager (RM), Resource Creator (RC), and Resource Updater (RU) for those specific attributes only.
-In this use case, since the Provision Domain is always the SCIM Client and the application is always the SCIM Server, the Active Push method will be used for the regular attributes of the SCIM Resource Object (SRO). The Active/Delta Pull method will be used to retrieve the specialized Resource Attributes that are the responsibility of the application.
+In this use case, since the Provision Domain is always the SCIM Client and the application is always the SCIM Server, the Active Push method will be used for the regular attributes of the SCIM Resource Object (SRO). The Active/Delta Pull method will be used to retrieve the specialized SCIM Resource Object Attribute (SROA) that are the responsibility of the application.
 
 ~~~
                                               Application
@@ -956,7 +962,7 @@ Provision Domain                               Customer A
 
 ### Reconciliations 
 Because of inconsistencies or mistakes in the SaaS App Resource Objects and it attributes might change and there is no visibility of the IdM that it happens.
-System will do reconciliation to make sure that SCIM Resource Object (SRO) and its Resrouce Attributes (RA) are consistent across different systems.
+System will do reconciliation to make sure that SCIM Resource Object (SRO) and its SCIM Resource Object Attribute (SROA) are consistent across different systems.
 If there is a new attributes from SCIM Server in the Delta Pull, the SCIM client will do a push to fix it and make again synchronize
 
 ~~~
