@@ -995,8 +995,7 @@ There are no additional IANA considerations to those specified [RFC7643] and [RF
 
 # Acknowledgements
 The editor would like to acknowledge the contribution to this draft versions of this document:
-
       Dean Saxe, Beyond Identity
-      Eliot Lear, Cisco Syste
+      Eliot Lear, Cisco Systems
 
 --- back
