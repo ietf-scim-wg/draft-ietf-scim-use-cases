@@ -994,6 +994,9 @@ Detailed security considerations are specified in Section 7 of the SCIM protocol
 There are no additional IANA considerations to those specified [RFC7643] and [RFC7644].
 
 # Acknowledgements
+The editor would like to acknowledge the contribution to this draft versions of this document:
 
+      Dean Saxe, Beyond Identity
+      Eliot Lear, Cisco Syste
 
 --- back
