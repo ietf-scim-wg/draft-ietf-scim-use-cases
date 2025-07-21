@@ -141,18 +141,18 @@ An entity can have one or more orchestrator roles, depending on the overall arch
  An entity that has information about SCIM Resource Object (SRO) and their SCIM Resource Object Attribute (SROA) but does not participate in SCIM flows. Examples include databases or internally-facing applications.
 
 ~~~
-+-----------------+ +---------------+   +-----------------+ +---------------+
-|    Resource     | |               |   |    Resource     | |               |
-|  (SRO) Object1  | |(SROA) Resource|   |  (SRO) Object2  | |(SROA) Resource|
-|(SROA) Attribute1| |   Attribute1  |   |(SROA) Attribute3| |   Attribute4  |
-+-----------------+ +---------------+   +-----------------+ +---------------+
-        |                   |                    |                  |
-  +-------------+   +-------------+       +-------------+    +-------------+
-  |(RC) Resource|   |(RU) Resource|       |(RC) Resource|    |(RU) Resource|
-  |  Creators   |   |  Updaters   |       |  Creators   |    |  Updaters   |
-  +-------------+   +-------------+       +-------------+    +-------------+
-        |                  |                    |                  |
-        +------------+-----+--------------------+-----+------------+
++----------------+ +--------------+ +----------------+ +--------------+
+|    Resource    | |              | |    Resource    | |              |
+|  (SRO)Object1  | |(SROA)Resource| |  (SRO)Object2  | |(SROA)Resource|
+|(SROA)Attribute1| |  Attribute2  | |(SROA)Attribute3| |  Attribute4  |
++----------------+ +--------------+ +----------------+ +--------------+
+        |                 |                 |                  |
+ +-------------+   +-------------+   +-------------+    +-------------+
+ |(RC) Resource|   |(RU) Resource|   |(RC) Resource|    |(RU) Resource|
+ |  Creators   |   |  Updaters   |   |  Creators   |    |  Updaters   |
+ +-------------+   +-------------+   +-------------+    +-------------+
+        |                  |                 |                  |
+        +------------+-----+-----------------+-----+------------+
                      |                                |
                      v                                v
              +----------------+              +----------------+
@@ -163,18 +163,18 @@ An entity can have one or more orchestrator roles, depending on the overall arch
              +----------------+              +----------------+
              |                |              |                |
              v                v              v                v
-      +-------------+ +-------------+   +-------------+ +-------------+
-      |(RS) Resource| |(RS) Resource|   |(RS) Resource| |(RS) Resource|
-      |  Subscriber | |  Subscriber |   |  Subscriber | |  Subscriber |
-      +-------------+ +-------------+   +-------------+ +-------------+
-             |                                                 |
-    +---------------------+                     +----------------+
-    |                     |                     |                |
-    v                     v                     v                v
-+--------------+ +--------------+      +--------------+ +--------------+
-|(SRO) Resource| |(SRO) Resource|      |(SRO) Resource| |(SRO) Resource|
-|   Object1    | |   Object2    |......|    ObjectX   | |   ObjectZ    |
-+--------------+ +--------------+      +--------------+ +--------------+
+      +-------------+ +-------------+ +-------------+ +-------------+
+      |(RS) Resource| |(RS) Resource| |(RS) Resource| |(RS) Resource|
+      |  Subscriber | |  Subscriber | |  Subscriber | |  Subscriber |
+      +-------------+ +-------------+ +-------------+ +-------------+
+             |                                               |
+    +---------------------+                 +----------------+
+    |                     |                 |                |
+    v                     v                 v                v
++--------------+ +--------------+    +--------------+ +--------------+
+|(SRO) Resource| |(SRO) Resource|    |(SRO) Resource| |(SRO) Resource|
+|   Object1    | |   Object2    |....|    ObjectX   | |   ObjectZ    |
++--------------+ +--------------+    +--------------+ +--------------+
     Figure 2: SCIM Orchestrators Roles
 ~~~
 
