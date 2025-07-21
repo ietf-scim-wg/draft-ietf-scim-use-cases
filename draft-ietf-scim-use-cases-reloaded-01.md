@@ -37,10 +37,6 @@ informative:
   RFC9112:
   RFC8417:
   RFC7832:
-  SAML2:
-     target: https://www.oasis-open.org/standard/saml/
-     org: Oasis Open
-     date: 2005-03
   SCIM Profile for Security Event Tokens:
      target: https://datatracker.ietf.org/doc/draft-ietf-scim-events
      title: SCIM Profile for Security Event Tokens
@@ -64,7 +60,7 @@ The specifications have two primary goals:
  2. Standardized patterns for how those resources can be operated on, including "CRUD" operations (Create, Read, Update, Delete) for resource objects and more advanced goals such as search filters, synchronization of large resource populations, etc.
 These goals are codified as a data model in [RFC7643], which defines resources, attributes, and default schemas, as well as a protocol definition built on HTTP in [RFC7644]. By standardizing the data model and protocol for resource management, entire ecosystems can achieve better interoperability, security, and scalability.
 
-This document provides definitions, overviews, concepts, flows, and use cases that implementers may need to understand the design and applicability of the SCIM schema [RFC7643] and SCIM protocol [RFC7644]. Unlike some protocols like Application Bridging for Federated Access Beyond Web (ABFAB) [RFC7832] and SAML2 WebSSO [SAML2], SCIM provides provisioning and de-provisioning of resources in a separate context from authentication. While SCIM is a protocol that standardizes the movement of data only between two parties in an HTTP client-server model, this document discusses implementation patterns that use concepts beyond the core schema and protocol, which are necessary to understand how SCIM actions can fit into larger architectures.
+This document provides definitions, overviews, concepts, flows, and use cases that implementers may need to understand the design and applicability of the SCIM schema [RFC7643] and SCIM protocol [RFC7644]. Unlike some protocols like Application Bridging for Federated Access Beyond Web (ABFAB) [RFC7832] and SAML2 WebSSO, SCIM provides provisioning and de-provisioning of resources in a separate context from authentication. While SCIM is a protocol that standardizes the movement of data only between two parties in an HTTP client-server model, this document discusses implementation patterns that use concepts beyond the core schema and protocol, which are necessary to understand how SCIM actions can fit into larger architectures.
 
 # Terminology
  The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC2119] when they appear in ALL CAPS. These words may also appear in this document in lowercase as plain English words, absent their normative meanings. Here is a list of acronyms and abbreviations used in this document:
