@@ -338,41 +338,41 @@ Correia & Dingle         Expires 22 January 2026                [Page 6]
 Internet-Draft               SCIM Use Cases                    July 2025
 
 
-+-----------------+ +---------------+   +-----------------+ +---------------+
-|    Resource     | |               |   |    Resource     | |               |
-|  (SRO) Object1  | |(SROA) Resource|   |  (SRO) Object2  | |(SROA) Resource|
-|(SROA) Attribute1| |   Attribute1  |   |(SROA) Attribute3| |   Attribute4  |
-+-----------------+ +---------------+   +-----------------+ +---------------+
-        |                   |                    |                  |
-  +-------------+   +-------------+       +-------------+    +-------------+
-  |(RC) Resource|   |(RU) Resource|       |(RC) Resource|    |(RU) Resource|
-  |  Creators   |   |  Updaters   |       |  Creators   |    |  Updaters   |
-  +-------------+   +-------------+       +-------------+    +-------------+
-        |                  |                    |                  |
-        +------------+-----+--------------------+-----+------------+
-                     |                                |
-                     v                                v
-             +----------------+              +----------------+
-             | (RM) Resource  |              | (RM) Resource  |
-             |     Manager    |              |     Manager    |
-             +----------------+              +----------------+
-                      |                               |
-             +----------------+              +----------------+
-             |                |              |                |
-             v                v              v                v
-      +-------------+ +-------------+   +-------------+ +-------------+
-      |(RS) Resource| |(RS) Resource|   |(RS) Resource| |(RS) Resource|
-      |  Subscriber | |  Subscriber |   |  Subscriber | |  Subscriber |
-      +-------------+ +-------------+   +-------------+ +-------------+
-             |                                                 |
-    +---------------------+                     +----------------+
-    |                     |                     |                |
-    v                     v                     v                v
-+--------------+ +--------------+      +--------------+ +--------------+
-|(SRO) Resource| |(SRO) Resource|      |(SRO) Resource| |(SRO) Resource|
-|   Object1    | |   Object2    |......|    ObjectX   | |   ObjectZ    |
-+--------------+ +--------------+      +--------------+ +--------------+
-    Figure 2: SCIM Orchestrators Roles
+ +----------------+ +--------------+ +----------------+ +--------------+
+ |    Resource    | |              | |    Resource    | |              |
+ |  (SRO)Object1  | |(SROA)Resource| |  (SRO)Object2  | |(SROA)Resource|
+ |(SROA)Attribute1| |  Attribute2  | |(SROA)Attribute3| |  Attribute4  |
+ +----------------+ +--------------+ +----------------+ +--------------+
+         |                 |                 |                  |
+  +-------------+   +-------------+   +-------------+    +-------------+
+  |(RC) Resource|   |(RU) Resource|   |(RC) Resource|    |(RU) Resource|
+  |  Creators   |   |  Updaters   |   |  Creators   |    |  Updaters   |
+  +-------------+   +-------------+   +-------------+    +-------------+
+         |                  |                 |                  |
+         +------------+-----+-----------------+-----+------------+
+                      |                                |
+                      v                                v
+              +----------------+              +----------------+
+              | (RM) Resource  |              | (RM) Resource  |
+              |     Manager    |              |     Manager    |
+              +----------------+              +----------------+
+                       |                               |
+              +----------------+              +----------------+
+              |                |              |                |
+              v                v              v                v
+       +-------------+ +-------------+ +-------------+ +-------------+
+       |(RS) Resource| |(RS) Resource| |(RS) Resource| |(RS) Resource|
+       |  Subscriber | |  Subscriber | |  Subscriber | |  Subscriber |
+       +-------------+ +-------------+ +-------------+ +-------------+
+              |                                               |
+     +---------------------+                 +----------------+
+     |                     |                 |                |
+     v                     v                 v                v
+ +--------------+ +--------------+    +--------------+ +--------------+
+ |(SRO) Resource| |(SRO) Resource|    |(SRO) Resource| |(SRO) Resource|
+ |   Object1    | |   Object2    |....|    ObjectX   | |   ObjectZ    |
+ +--------------+ +--------------+    +--------------+ +--------------+
+     Figure 2: SCIM Orchestrators Roles
 
 3.1.4.  Triggers
 
