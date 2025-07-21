@@ -1,23 +1,35 @@
 ---
-stand_alone: true
-docname: draft-ietf-scim-use-cases-reloaded-01
-ipr: trust200902
-submissiontype: IETF
-keyword: [Internet-Draft, SCIM]
-workgroup: SCIM
-cat: info
 title: 'System for Cross-domain Identity Management: Definitions, Overview, Concepts, and Requirements'
 abbrev: 'SCIM Use Cases'
+docname: draft-ietf-scim-use-cases-reloaded-01
+
+category: std 
+
+ipr: trust200902
+area: IETF
+workgroup: SCIM
+keyword: [Internet-Draft, SCIM]
+
+stand_alone: yes
+<smart_quotes: no
+pi: [toc, sortrefs, symrefs]
+submissionType: IETF
+
 Lang: en
+
 author:
-- name: Paulo Jorge Correia
-  org: Cisco Systems
-  email: paucorre@cisco.com
-- name: Pamela Dingle
-  org: Microsoft Corporation
-  email: pamela.dingle@microsoft.com
+   - 
+    name: Paulo Jorge Correia
+    organization: Cisco Systems
+    email: paucorre@cisco.com
+   - 
+    name: Pamela Dingle
+    organization: Microsoft Corporation
+    email: pamela.dingle@microsoft.com
+
 normative:
   RFC2119:
+
 informative:
   RFC7643:
   RFC7644:
