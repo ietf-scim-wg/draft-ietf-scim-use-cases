@@ -1,0 +1,16 @@
+<reference anchor="RFC7644" target="https://www.rfc-editor.org/info/rfc7644">
+  <front>
+    <title>System for Cross-domain Identity Management: Protocol</title>
+    <author fullname="P. Hunt" initials="P." role="editor" surname="Hunt"/>
+    <author fullname="K. Grizzle" initials="K." surname="Grizzle"/>
+    <author fullname="M. Ansari" initials="M." surname="Ansari"/>
+    <author fullname="E. Wahlstroem" initials="E." surname="Wahlstroem"/>
+    <author fullname="C. Mortimore" initials="C." surname="Mortimore"/>
+    <date month="September" year="2015"/>
+    <abstract>
+      <t>The System for Cross-domain Identity Management (SCIM) specification is an HTTP-based protocol that makes managing identities in multi-domain scenarios easier to support via a standardized service. Examples include, but are not limited to, enterprise-to-cloud service providers and inter-cloud scenarios. The specification suite seeks to build upon experience with existing schemas and deployments, placing specific emphasis on simplicity of development and integration, while applying existing authentication, authorization, and privacy models. SCIM's intent is to reduce the cost and complexity of user management operations by providing a common user schema, an extension model, and a service protocol defined by this document.</t>
+    </abstract>
+  </front>
+  <seriesInfo name="RFC" value="7644"/>
+  <seriesInfo name="DOI" value="10.17487/RFC7644"/>
+</reference>

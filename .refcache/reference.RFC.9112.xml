@@ -1,0 +1,16 @@
+<reference anchor="RFC9112" target="https://www.rfc-editor.org/info/rfc9112">
+  <front>
+    <title>HTTP/1.1</title>
+    <author fullname="R. Fielding" initials="R." role="editor" surname="Fielding"/>
+    <author fullname="M. Nottingham" initials="M." role="editor" surname="Nottingham"/>
+    <author fullname="J. Reschke" initials="J." role="editor" surname="Reschke"/>
+    <date month="June" year="2022"/>
+    <abstract>
+      <t>The Hypertext Transfer Protocol (HTTP) is a stateless application-level protocol for distributed, collaborative, hypertext information systems. This document specifies the HTTP/1.1 message syntax, message parsing, connection management, and related security concerns.</t>
+      <t>This document obsoletes portions of RFC 7230.</t>
+    </abstract>
+  </front>
+  <seriesInfo name="STD" value="99"/>
+  <seriesInfo name="RFC" value="9112"/>
+  <seriesInfo name="DOI" value="10.17487/RFC9112"/>
+</reference>

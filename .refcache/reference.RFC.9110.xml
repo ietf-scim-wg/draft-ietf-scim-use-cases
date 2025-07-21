@@ -1,0 +1,16 @@
+<reference anchor="RFC9110" target="https://www.rfc-editor.org/info/rfc9110">
+  <front>
+    <title>HTTP Semantics</title>
+    <author fullname="R. Fielding" initials="R." role="editor" surname="Fielding"/>
+    <author fullname="M. Nottingham" initials="M." role="editor" surname="Nottingham"/>
+    <author fullname="J. Reschke" initials="J." role="editor" surname="Reschke"/>
+    <date month="June" year="2022"/>
+    <abstract>
+      <t>The Hypertext Transfer Protocol (HTTP) is a stateless application-level protocol for distributed, collaborative, hypertext information systems. This document describes the overall architecture of HTTP, establishes common terminology, and defines aspects of the protocol that are shared by all versions. In this definition are core protocol elements, extensibility mechanisms, and the "http" and "https" Uniform Resource Identifier (URI) schemes.</t>
+      <t>This document updates RFC 3864 and obsoletes RFCs 2818, 7231, 7232, 7233, 7235, 7538, 7615, 7694, and portions of 7230.</t>
+    </abstract>
+  </front>
+  <seriesInfo name="STD" value="97"/>
+  <seriesInfo name="RFC" value="9110"/>
+  <seriesInfo name="DOI" value="10.17487/RFC9110"/>
+</reference>
