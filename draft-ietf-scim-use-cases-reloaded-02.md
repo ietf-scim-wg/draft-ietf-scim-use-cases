@@ -29,6 +29,7 @@ author:
 
 normative:
   RFC2119:
+  RFC8174:
 
 informative:
   RFC7643:
@@ -747,7 +748,7 @@ Throughout this document all figures may contain spaces and extra line-wrapping 
    3. SCIM action - SCIM Client performs Active Push
 
 #### Multi-Tenant Resource Manager (RM)
- Multi-Tenant Resource Manager are typically Identity Manager (IdM) that are cloud base, normally designated as IDaaS, where the upStream and Downstream are either on-premise or Cloud base.
+ Multi-Tenant Resource Manager are typically Identity Manager (IdM) that are cloud-based, normally designated as IDaaS, where the upstream and downstream are either on-premise or cloud-based.
 
 ##### Multi-Tenant Resource Manager that is the SCIM Server
  Same information as Single-Tenant Resource Manager that is the SCIM Server but the Provision domain has multiple Tenants 
@@ -894,7 +895,7 @@ Throughout this document all figures may contain spaces and extra line-wrapping 
    1. SCIM action - SCIM client performs Active Pull   
    2. Non SCIM action   
 
-### Provide Credetials to manage Device
+### Provide Credentials to manage Device
  The Device Manager can provide Resource Attributes to the client application so that the devices can be configured using the commissioning tool. For example, the Device Manager can provide credentials to the device using the client application as the gateway. Through the commissioning tool, which can be a single entity, these credentials can be delivered to the device.
 
 ~~~
@@ -918,10 +919,10 @@ Throughout this document all figures may contain spaces and extra line-wrapping 
 ### Attribute authority in a SaaS application
  In some deployments, not all SCIM Resource Object Attributes (SROA) are owned by the same system. For example, an IdM MAY be the authority for core user attributes (e.g., givenName, familyName, addresses), while a SaaS email application MAY be authoritative for the user’s email address. In such cases, each system acts as a SCIM Client and/or SCIM Server for the SROA it owns: the IdM actively pushes its authoritative attributes to the application, and the application actively pushes its authoritative attributes (e.g., email address) to the IdM or exposes them for client active pull. Ownership and update flows SHOULD be explicitly defined to avoid conflicts.
 
-#### Implementers Provision Domain is a SCIM Client and a SCIM server
+#### Implementer's Provision Domain as a SCIM Client and a SCIM Server
  The implementer's domain acts as the SCIM Client and is the authority for regular attributes such as first name, last name, home address, etc., of a user. These attributes are created and updated by the Provision Domain, which functions as the Resource Manager (RM), Resource Creator (RC), and Resource Updater (RU).
  The application is the authority for one or more specific SCIM Resource Object Attribute (SROA), such as the email address of a given user. This means the application will serve as the Resource Manager (RM), Resource Creator (RC), and Resource Updater (RU) for those specific attributes only.
- Both the Provision Domain and the application will function as both the SCIM Client and SCIM Server for the respective SCIM Resource Object Attribute (SROA) they are responsible for. They will use the SCIM action of Active Push to pass the RSCIM Resource Object Attribute (SROA) of the SCIM Resource Object (SRO) to their counterpart.
+ Both the Provision Domain and the application will function as both the SCIM Client and SCIM Server for the respective SCIM Resource Object Attribute (SROA) they are responsible for. They will use the SCIM action of Active Push to pass the SCIM Resource Object Attribute (SROA) of the SCIM Resource Object (SRO) to their counterpart.
  Thus, both the roles of SCIM Server and SCIM Client exist within the Provision Domain and the application.
 
 ~~~
@@ -947,7 +948,7 @@ Throughout this document all figures may contain spaces and extra line-wrapping 
  ||          ||                                  ||          ||
  |+----------+|                                  |+----------+|
  +------------+                                  +------------+
-    Figure 26: Single SCIM Resource Object (SRO) with diferent 
+    Figure 26: Single SCIM Resource Object (SRO) with different 
       SCIM Resource Object Attribute (SROA) authority implemented 
       between the Provision Domain and the customer SaaS App 
 ~~~
@@ -979,9 +980,9 @@ Throughout this document all figures may contain spaces and extra line-wrapping 
    2. SCIM action - SCIM Client performs Active/Delta Pull
 
 ### Reconciliations 
- Because of inconsistencies or mistakes in the SaaS App Resource Objects and it attributes might change and there is no visibility of the IdM that it happens.
+ Because of inconsistencies or mistakes in the SaaS App Resource Objects and its attributes might change and there is no visibility of the IdM that it happens.
  System will do reconciliation to make sure that SCIM Resource Object (SRO) and its SCIM Resource Object Attribute (SROA) are consistent across different systems.
- If there is a new attributes from SCIM Server in the Delta Pull, the SCIM client will do a push to fix it and make again synchronize
+ If there is a new attributes from SCIM Server in the Delta Pull, the SCIM client will do a push to fix it and synchronize again.
 
 ~~~
                                                Application
