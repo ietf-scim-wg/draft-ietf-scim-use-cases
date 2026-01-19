@@ -1016,9 +1016,9 @@ Throughout this document all figures may contain spaces and extra line-wrapping 
 
 # Acknowledgements
  The editor would like to acknowledge the contribution to this draft versions of this document:
+   
    Dean H. Saxe, Remitly
 
    Eliot Lear, Cisco Systems
-
 
 --- back
