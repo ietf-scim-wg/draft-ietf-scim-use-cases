@@ -201,19 +201,19 @@ Throughout this document all figures may contain spaces and extra line-wrapping 
  Single Sign-On triggers occur when a user authenticates via federated protocols such as SAML 2.0 or OpenID Connect. If a federated assertion arrives for a user who has not yet been provisioned into the destination application, the application may be triggered to perform just-in-time (JIT) provisioning. This trigger occurs in scenarios where a Single Sign-On flow happens, but not all the resource attributes for the user object are passed in the federated assertion, resulting in a SCIM action to push or pull the remaining needed attributes. SCIM operates out-of-band from authentication; JIT may create partial SROs and SCIM completes attributes via push or pull. 
 
 ~~~
- +---------------+                                   +---------------+
- |               |                                   |               |
- |               |                                   |               |
- |               |                                   |     SCIM      |
- |    Client     |                (1)                |    Server     | 
- |               | <-------------------------------> |               |
- |  (typically   |                                   | (typically an |
- |   an IdM)     |                (2)                |      SaaS     |
- |               | <-------------------------------> | Application)  |   
- |               |                                   |               |
- |    RC/RU/RM   |                                   |      RS       |
- |               |                                   |               |
- +---------------+                                   +---------------+
+ +---------------+                                  +---------------+
+ |               |                                  |               |
+ |               |                                  |               |
+ |               |                                  |     SCIM      |
+ |    Client     |                (1)               |    Server     | 
+ |               | <------------------------------> |               |
+ |  (typically   |                                  | (typically an |
+ |   an IdM)     |                (2)               |      SaaS     |
+ |               | <------------------------------> | Application)  |   
+ |               |                                  |               |
+ |    RC/RU/RM   |                                  |      RS       |
+ |               |                                  |               |
+ +---------------+                                  +---------------+
     Figure 3: SCIM trigger using  Single Sign-On
 ~~~
 
@@ -229,19 +229,19 @@ Throughout this document all figures may contain spaces and extra line-wrapping 
  The most common and widely deployed example is a SCIM client providing information about a SCIM Resource Object (SRO) and its SCIM Resource Object Attribute (SROA) to a server, which is also called a SCIM Server in [RFC7643] and [RFC7644].
 
 ~~~
- +----------------+                                   +----------------+
- |                |                                   |                |
- |                |                                   |                |
- |                |                                   |                |
- |      SCIM      |                (1)                |      SCIM      |
- |     Client     |  -------------------------------> |     Server     |
- |                |                                   |                |
- |                |                (2)                |                |
- |                | <-------------------------------- |                |   
- |     RM/RC/RU   |                                   |        RS      |
- |                |                                   |                |
- |                |                                   |                |
- +----------------+                                   +----------------+
+ +----------------+                                +----------------+
+ |                |                                |                |
+ |                |                                |                |
+ |                |                                |                |
+ |      SCIM      |             (1)                |      SCIM      |
+ |     Client     |  ----------------------------> |     Server     |
+ |                |                                |                |
+ |                |             (2)                |                |
+ |                | <----------------------------- |                |   
+ |     RM/RC/RU   |                                |        RS      |
+ |                |                                |                |
+ |                |                                |                |
+ +----------------+                                +----------------+
     Figure 4: SCIM action for Client Active Push
 ~~~
 
@@ -306,18 +306,18 @@ Throughout this document all figures may contain spaces and extra line-wrapping 
  "Domain-Based Replication" events (DBR) are used to synchronize resource changes between SCIM service providers within a common administrative domain.
 
 ~~~
- +--------+                +---------------+                 +---------+
- |        |                |               |                 |         |
- |   SCIM  |                |               |                 |         |
- | Client |                |  SCIM Server  |                 |         |
- |        |     (1)        |               |      (3)        |  SCIM   |
- |        | <------------- |               | --------------> | Server  |
- |        |                |               |                 |         | 
- | RM/RC  |     (2)        |               |                 |         |
- |  /RU   | -------------> |               |                 |         |
- |        |                |     RS/RC/RU  |                 |   RS    |
- |        |                |               |                 |         |
- +--------+                +---------------+                 +---------+
+ +--------+              +---------------+                +---------+
+ |        |              |               |                |         |
+ |  SCIM  |              |               |                |         |
+ | Client |              |  SCIM Server  |                |         |
+ |        |     (1)      |               |      (3)       |  SCIM   |
+ |        | <----------- |               | -------------> | Server  |
+ |        |              |               |                |         | 
+ | RM/RC  |     (2)      |               |                |         |
+ |  /RU   | -----------> |               |                |         |
+ |        |              |     RS/RC/RU  |                |   RS    |
+ |        |              |               |                |         |
+ +--------+              +---------------+                +---------+
     Figure 7: SCIM actions aggregated by a SCIM server then 
       transmitted via SCIM Events using Domain Replication Mode
 ~~~
@@ -331,18 +331,18 @@ Throughout this document all figures may contain spaces and extra line-wrapping 
  In any Event Publisher and Receiver relationship, the set of SCIM resources (e.g., users) that are linked or coordinated is managed within the context of an event feed, which MAY be a subset of the total set of resources on either side. For example, an event feed could be limited to users who have consented to the sharing of information between domains. To support this capability, "feed" specific events are defined to indicate the addition and removal of SCIM resources from a feed.
   
 ~~~
- +--------+                +---------------+                 +---------+
- |        |                |               |                 |         |
- |  SCIM  |                |               |                 |         |
- | Client |                |  SCIM Server  |                 |         |
- |        |     (1)        |               |      (3)        |  SCIM   |
- |        | <------------- |               | --------------> | Server  |
- |        |                |               |                 |         |
- | RM/RC  |     (2)        |               |      (4)        |         |
- |  /RU   | -------------> |               | --------------> |         |
- |        |                |     RS/RC/RU  |                 |   RS    |
- |        |                |               |                 |         |
- +--------+                +---------------+                 +---------+
+ +--------+              +---------------+                +---------+
+ |        |              |               |                |         |
+ |  SCIM  |              |               |                |         |
+ | Client |              |  SCIM Server  |                |         |
+ |        |     (1)      |               |      (3)       |  SCIM   |
+ |        | <----------- |               | -------------> | Server  |
+ |        |              |               |                |         |
+ | RM/RC  |     (2)      |               |      (4)       |         |
+ |  /RU   | -----------> |               | -------------> |         |
+ |        |              |     RS/RC/RU  |                |   RS    |
+ |        |              |               |                |         |
+ +--------+              +---------------+                +---------+
     Figure 8: SCIM actions aggregated by a SCIM server then 
       transmitted via SCIM Events using Co-Ordinated Provisioning
 ~~~
@@ -650,7 +650,7 @@ Throughout this document all figures may contain spaces and extra line-wrapping 
  |   SCIM   |        ||   SCIM  ||   SCIM   ||        |   SCIM  |
  |  Client  |        ||  Server ||  Server  ||        |  Client |
  |   RC/RU  |  (1)   ||  RS/RM  || RM/RC/RU ||        |         |  
- |(Source A)|------->||         ||          ||        |         |         
+ |(Source A)|------->||         ||          ||        |         |     
  +----------+        ||         ||          ||  (3)   |    RS   |
  +----------+        ||  RC/RU  ||          ||------->|         |
  |    Non   |        ||         ||          ||        |         |
@@ -1017,6 +1017,6 @@ Throughout this document all figures may contain spaces and extra line-wrapping 
    Dean H. Saxe, Remitly
 
    Eliot Lear, Cisco Systems
-   
+
 
 --- back
