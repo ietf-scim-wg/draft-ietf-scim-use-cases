@@ -799,7 +799,8 @@ Throughout this document all figures may contain spaces and extra line-wrapping 
  ||(Tenant C)||                                   |(Costumer C)|
  |+----------+|                                   +------------+
  +------------+
-    Figure 21: Manufacturer is the SCIM client and push SCIM Resource Object (SRO) to Customers 
+    Figure 21: Manufacturer is the SCIM client and push SCIM ~
+    Resource Object (SRO) to Customers 
 ~~~
 
    1. SCIM action - SCIM Client performs Active Push
@@ -888,7 +889,8 @@ Throughout this document all figures may contain spaces and extra line-wrapping 
  |  RM/RS |  ---------------------------> |  SCIM  |
  |        |                               | Client |
  +--------+                               +--------+
-    Figure 24: Device manager provides SCIM Resource Object (SRO) and SCIM Resource Object Attribute (SROA) to the Devices 
+    Figure 24: Device manager provides SCIM Resource Object (SRO) 
+      and SCIM Resource Object Attribute (SROA) to the Devices 
       through Commissioning Tool
 ~~~
 
